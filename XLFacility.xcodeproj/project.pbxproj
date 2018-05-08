@@ -25,6 +25,11 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		B98B408320A1DED0008F4529 /* XLRollingFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B98B408220A1DED0008F4529 /* XLRollingFileLogger.m */; };
+		B98B408420A1DED0008F4529 /* XLRollingFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B98B408220A1DED0008F4529 /* XLRollingFileLogger.m */; };
+		B98B408520A1DED0008F4529 /* XLRollingFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B98B408220A1DED0008F4529 /* XLRollingFileLogger.m */; };
+		B98B408620A1DED0008F4529 /* XLRollingFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B98B408220A1DED0008F4529 /* XLRollingFileLogger.m */; };
+		B98B408720A1DED0008F4529 /* XLRollingFileLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = B98B408220A1DED0008F4529 /* XLRollingFileLogger.m */; };
 		E2168F7019EDC8FF00865350 /* XLTCPClientLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = E2168F6F19EDC8FF00865350 /* XLTCPClientLogger.m */; };
 		E2168F7119EDC8FF00865350 /* XLTCPClientLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = E2168F6F19EDC8FF00865350 /* XLTCPClientLogger.m */; };
 		E2168F7219EDC8FF00865350 /* XLTCPClientLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = E2168F6F19EDC8FF00865350 /* XLTCPClientLogger.m */; };
@@ -185,6 +190,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B98B408120A1DED0008F4529 /* XLRollingFileLogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = XLRollingFileLogger.h; sourceTree = "<group>"; };
+		B98B408220A1DED0008F4529 /* XLRollingFileLogger.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = XLRollingFileLogger.m; sourceTree = "<group>"; };
 		E2168F6E19EDC8FF00865350 /* XLTCPClientLogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XLTCPClientLogger.h; sourceTree = "<group>"; };
 		E2168F6F19EDC8FF00865350 /* XLTCPClientLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XLTCPClientLogger.m; sourceTree = "<group>"; };
 		E2168F7E19EDF2C000865350 /* TCPServer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = TCPServer; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -426,6 +433,8 @@
 				E29DC8AA19EA425700A1B39F /* XLFacilityPrivate.h */,
 				E29DC8A519EA425700A1B39F /* XLFileLogger.h */,
 				E29DC8A619EA425700A1B39F /* XLFileLogger.m */,
+				B98B408120A1DED0008F4529 /* XLRollingFileLogger.h */,
+				B98B408220A1DED0008F4529 /* XLRollingFileLogger.m */,
 				E25663D619EF63330040CF5E /* XLFunctions.h */,
 				E25663D719EF63330040CF5E /* XLFunctions.m */,
 				E29DC8A719EA425700A1B39F /* XLLogger.h */,
@@ -692,6 +701,7 @@
 				E2B03EA119F4C27D00D56CA6 /* GCDTelnetConnection.m in Sources */,
 				E2168F9119EE034000865350 /* XLLogRecord.m in Sources */,
 				E2168F9419EE035800865350 /* XLLogger.m in Sources */,
+				B98B408720A1DED0008F4529 /* XLRollingFileLogger.m in Sources */,
 				E2B03EAB19F4C27D00D56CA6 /* NSMutableString+ANSI.m in Sources */,
 				E2168F9319EE034E00865350 /* XLFileLogger.m in Sources */,
 				E25663DC19EF63330040CF5E /* XLFunctions.m in Sources */,
@@ -716,6 +726,7 @@
 				E26ABC3819EC9FF700654D9F /* XLTCPServerLogger.m in Sources */,
 				E26ABC3119EC9FF700654D9F /* XLFacility.m in Sources */,
 				E2B03E9F19F4C27D00D56CA6 /* GCDTelnetConnection.m in Sources */,
+				B98B408520A1DED0008F4529 /* XLRollingFileLogger.m in Sources */,
 				E26ABC3519EC9FF700654D9F /* XLStandardLogger.m in Sources */,
 				E26ABC3019EC9FF700654D9F /* XLCallbackLogger.m in Sources */,
 				E26ABC3419EC9FF700654D9F /* XLLogRecord.m in Sources */,
@@ -740,6 +751,7 @@
 				E29DC8B819EA425700A1B39F /* XLCallbackLogger.m in Sources */,
 				E2B03EC719F4C28A00D56CA6 /* GCDTCPServer.m in Sources */,
 				E29DC8B619EA425700A1B39F /* XLASLLogger.m in Sources */,
+				B98B408320A1DED0008F4529 /* XLRollingFileLogger.m in Sources */,
 				E29DC8BA19EA425700A1B39F /* XLFacility.m in Sources */,
 				E25663D819EF63330040CF5E /* XLFunctions.m in Sources */,
 				E2B03EBD19F4C28A00D56CA6 /* GCDTCPConnection.m in Sources */,
@@ -771,6 +783,7 @@
 				E298C48219ED890500C76821 /* XLDatabaseLogger.m in Sources */,
 				E2B03EC519F4C28A00D56CA6 /* GCDTCPPeer.m in Sources */,
 				E298C48319ED890500C76821 /* XLHTTPServerLogger.m in Sources */,
+				B98B408620A1DED0008F4529 /* XLRollingFileLogger.m in Sources */,
 				E2B03EBB19F4C28A00D56CA6 /* GCDTCPClient.m in Sources */,
 				E2B03EC019F4C28A00D56CA6 /* GCDTCPConnection.m in Sources */,
 				E298C48019ED890500C76821 /* XLLogRecord.m in Sources */,
@@ -803,6 +816,7 @@
 				E29DC8B919EA425700A1B39F /* XLCallbackLogger.m in Sources */,
 				E29DC8C719EA425700A1B39F /* XLHTTPServerLogger.m in Sources */,
 				E2B03E9E19F4C27D00D56CA6 /* GCDTelnetConnection.m in Sources */,
+				B98B408420A1DED0008F4529 /* XLRollingFileLogger.m in Sources */,
 				E29DC8BF19EA425700A1B39F /* XLLogger.m in Sources */,
 				E29DC8C919EA425700A1B39F /* XLTelnetServerLogger.m in Sources */,
 				E29DC8C119EA425700A1B39F /* XLLogRecord.m in Sources */,
