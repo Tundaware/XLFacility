@@ -64,6 +64,8 @@
       [self ensureDirectoryExists:path];
     }
 
+    [self purgeOldFiles];
+
     _purgeQueue = dispatch_queue_create([[NSString stringWithFormat:@"%@.purging", self.class]
                                          cStringUsingEncoding:NSUTF8StringEncoding],
                                         DISPATCH_QUEUE_SERIAL);
@@ -165,7 +167,7 @@
   self.backingLogger = [self generateLoggerWithLogFilePath];
 
   if (self.rolledLogger.isOpen) {
-    [self.backingLogger open];
+    [self open];
     [self.rolledLogger close];
   }
 
