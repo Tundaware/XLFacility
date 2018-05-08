@@ -31,7 +31,7 @@
 #import <sys/stat.h>
 
 #define kXLRollingFileLoggerDefaultMaxFileSize      1024 * 1024 * 1 // 1 MB
-#define kXLRollingFileLoggerDefaultMaxNumberOfFiles 20
+#define kXLRollingFileLoggerDefaultMaxNumberOfFiles 10
 
 @interface XLRollingFileLogger ()
 
@@ -64,8 +64,6 @@
       [self ensureDirectoryExists:path];
     }
 
-    [self purgeOldFiles];
-
     _purgeQueue = dispatch_queue_create([[NSString stringWithFormat:@"%@.purging", self.class]
                                          cStringUsingEncoding:NSUTF8StringEncoding],
                                         DISPATCH_QUEUE_SERIAL);
@@ -73,6 +71,7 @@
     _maxFileSize = kXLRollingFileLoggerDefaultMaxFileSize;
     _maxNumberOfFiles = kXLRollingFileLoggerDefaultMaxNumberOfFiles;
 
+    [self purgeOldFiles];
 
     _backingLogger = [self generateLoggerWithLogFilePath];
   }
