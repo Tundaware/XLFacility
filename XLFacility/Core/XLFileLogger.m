@@ -67,6 +67,10 @@
   }
 }
 
+- (BOOL)isOpen {
+  return _fd >= 0;
+}
+
 - (BOOL)open {
   if (_filePath) {
     _fd = open([_filePath fileSystemRepresentation], O_CREAT | (_append ? 0 : O_TRUNC) | O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
