@@ -37,6 +37,7 @@
 #import "XLStandardLogger.h"
 #import "XLCallbackLogger.h"
 #import "XLFileLogger.h"
+#import "XLRollingFileLogger.h"
 #import "XLDatabaseLogger.h"
 #import "XLASLLogger.h"
 #import "XLTelnetServerLogger.h"
@@ -213,6 +214,81 @@ typedef void (^TCPServerConnectionBlock)(GCDTCPPeerConnection* connection);
 
   [XLSharedFacility removeLogger:logger];
   [[NSFileManager defaultManager] removeItemAtPath:filePath error:NULL];
+}
+
+- (void)testRollingFileLogger {
+  NSString* directoryPath = [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]];
+  XLRollingFileLogger* logger = [[XLRollingFileLogger alloc] initWithDirectoryPath:directoryPath create:YES];
+  logger.format = @"[%L] %m";
+  logger.maxFileSize = 80; // 80 bytes
+  
+  [XLSharedFacility addLogger:logger];
+
+  for (int i = 0; i < 10; ++i) {
+    [XLSharedFacility logMessageWithTag:XLOG_TAG level:(1 + i % 4) format:@"Hello World #%i!", i + 1];
+  }
+  usleep(kLoggingDelay);
+
+  NSArray<NSString *> *files = [NSFileManager.defaultManager contentsOfDirectoryAtPath:directoryPath error:NULL];
+  files = [files sortedArrayUsingComparator:^NSComparisonResult(NSString *file1, NSString *file2) {
+    NSString *path1 = [directoryPath stringByAppendingPathComponent:file1];
+    NSString *path2 = [directoryPath stringByAppendingPathComponent:file2];
+    NSDictionary *attr1 = [NSFileManager.defaultManager attributesOfItemAtPath:path1 error:NULL];
+    NSDictionary *attr2 = [NSFileManager.defaultManager attributesOfItemAtPath:path2 error:NULL];
+    NSDate *date1 = [attr1 fileCreationDate];
+    NSDate *date2 = [attr2 fileCreationDate];
+    return [date1 compare:date2];
+  }];
+
+  XCTAssertEqual(files.count, 4);
+
+  NSString *contents = [[NSString alloc] initWithContentsOfFile:[directoryPath stringByAppendingPathComponent:files[0]] encoding:NSUTF8StringEncoding error:NULL];
+  XCTAssertEqualObjects(contents, @"\
+[VERBOSE  ] Hello World #1!\n\
+[INFO     ] Hello World #2!\n\
+[WARNING  ] Hello World #3!\n\
+");
+
+  contents = [[NSString alloc] initWithContentsOfFile:[directoryPath stringByAppendingPathComponent:files[1]] encoding:NSUTF8StringEncoding error:NULL];
+  XCTAssertEqualObjects(contents, @"\
+[ERROR    ] Hello World #4!\n\
+[VERBOSE  ] Hello World #5!\n\
+[INFO     ] Hello World #6!\n\
+");
+
+  contents = [[NSString alloc] initWithContentsOfFile:[directoryPath stringByAppendingPathComponent:files[2]] encoding:NSUTF8StringEncoding error:NULL];
+  XCTAssertEqualObjects(contents, @"\
+[WARNING  ] Hello World #7!\n\
+[ERROR    ] Hello World #8!\n\
+[VERBOSE  ] Hello World #9!\n\
+");
+
+  contents = [[NSString alloc] initWithContentsOfFile:[directoryPath stringByAppendingPathComponent:files[3]] encoding:NSUTF8StringEncoding error:NULL];
+  XCTAssertEqualObjects(contents, @"\
+[INFO     ] Hello World #10!\n\
+");
+
+  [XLSharedFacility removeLogger:logger];
+  [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:NULL];
+
+  directoryPath = [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSProcessInfo processInfo] globallyUniqueString]];
+  logger = [[XLRollingFileLogger alloc] initWithDirectoryPath:directoryPath create:YES];
+  logger.format = @"[%L] %m";
+  logger.maxFileSize = 80; // 80 bytes
+  logger.maxNumberOfFiles = 6;
+
+  [XLSharedFacility addLogger:logger];
+
+  for (int i = 0; i < 100; ++i) {
+    [XLSharedFacility logMessageWithTag:XLOG_TAG level:(1 + i % 4) format:@"Hello World #%i!", i + 1];
+  }
+  usleep(kLoggingDelay);
+
+  NSUInteger totalFileCount = [NSFileManager.defaultManager contentsOfDirectoryAtPath:directoryPath error:NULL].count;
+  XCTAssertEqual(totalFileCount, 6);
+
+  [XLSharedFacility removeLogger:logger];
+  [[NSFileManager defaultManager] removeItemAtPath:directoryPath error:NULL];
 }
 
 - (void)testDatabaseLogger {
